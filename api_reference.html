@@ -1,0 +1,1103 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Bias and Fairness Metrics" href="metrics/bias.html"><link rel="prev" title="Fairness Audit Workflow" href="guides/fairness_audit_workflow.html">
+
+    <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>API Reference - TrustLens 0.4.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">TrustLens 0.4.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <span class="sidebar-brand-text">TrustLens 0.4.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problem.html">The Problem Nobody Ships Around</a></li>
+<li class="toctree-l1"><a class="reference internal" href="audience.html">Who This Is For</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features and Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use_cases.html">Real-World Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trust_score_explained.html">Trust Score Explained</a></li>
+<li class="toctree-l1"><a class="reference internal" href="known_limitations.html">Known Limitations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/model_comparison_workflow.html">Model Comparison Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/ci_deployment_gate.html">CI and Deployment Gate Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/fairness_audit_workflow.html">Fairness Audit Workflow</a></li>
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">API Reference</a><input aria-label="Toggle navigation of API Reference" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="metrics/bias.html">Bias and Fairness Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/calibration.html">Calibration Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/failure.html">Failure Analysis Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/representation.html">Representation Metrics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DESIGN_PRINCIPLES.html">TrustLens Design Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EXPERIMENTAL.html">Experimental Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FUTURE_EXTENSIONS.html">TrustLens — Future Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PAGE_TEMPLATE.html">Documentation Page Template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internal/prediction_contract.html">Internal RFC: Prediction Semantics Contract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plans/IMPLEMENTATION_PLAN_XGBoost.html">Implementation plan: XGBoost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plans/IMPLEMENTATION_PLAN_Keras.html">Implementation plan: Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plans/IMPLEMENTATION_PLAN_TensorFlow.html">Implementation plan: TensorFlow</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/api_reference.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">¶</a></h1>
+<p>This page provides the technical documentation for all public components of TrustLens.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="metrics/bias.html">Bias and Fairness Metrics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="metrics/bias.html#why-this-matters">Why This Matters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/bias.html#when-to-use">When to Use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/bias.html#inputs-and-assumptions">Inputs and Assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/bias.html#output-and-interpretation">Output and Interpretation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/bias.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/bias.html#multi-feature-fairness-visualization">Multi-Feature Fairness Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/bias.html#limitations-and-caveats">Limitations and Caveats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/bias.html#module-trustlens.metrics.bias">API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/bias.html#related-pages">Related Pages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="metrics/calibration.html">Calibration Metrics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="metrics/calibration.html#why-this-matters">Why This Matters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/calibration.html#when-to-use">When to Use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/calibration.html#inputs-and-assumptions">Inputs and Assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/calibration.html#output-and-interpretation">Output and Interpretation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/calibration.html#limitations-and-caveats">Limitations and Caveats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/calibration.html#module-trustlens.metrics.calibration">API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/calibration.html#related-pages">Related Pages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="metrics/failure.html">Failure Analysis Metrics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="metrics/failure.html#why-this-matters">Why This Matters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/failure.html#when-to-use">When to Use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/failure.html#inputs-and-assumptions">Inputs and Assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/failure.html#output-and-interpretation">Output and Interpretation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/failure.html#limitations-and-caveats">Limitations and Caveats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/failure.html#module-trustlens.metrics.failure">API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/failure.html#related-pages">Related Pages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="metrics/representation.html">Representation Metrics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="metrics/representation.html#why-this-matters">Why This Matters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/representation.html#when-to-use">When to Use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/representation.html#inputs-and-assumptions">Inputs and Assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/representation.html#output-and-interpretation">Output and Interpretation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/representation.html#limitations-and-caveats">Limitations and Caveats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/representation.html#d-embedding-visualization">2D Embedding Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/representation.html#module-trustlens.metrics.representation">API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/representation.html#related-pages">Related Pages</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr class="docutils" />
+<section id="core-api">
+<h2>Core API<a class="headerlink" href="#core-api" title="Link to this heading">¶</a></h2>
+<section id="trustlens-analyze">
+<h3><code class="docutils literal notranslate"><span class="pre">trustlens.analyze</span></code><a class="headerlink" href="#trustlens-analyze" title="Link to this heading">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="trustlens.api.analyze">
+<span class="sig-prename descclassname"><span class="pre">trustlens.api.</span></span><span class="sig-name descname"><span class="pre">analyze</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_prob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">framework</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embeddings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitive_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modules</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plugins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#trustlens.report.TrustReport" title="trustlens.report.TrustReport"><span class="pre">TrustReport</span></a></span></span><a class="reference internal" href="_modules/trustlens/api.html#analyze"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trustlens.api.analyze" title="Link to this definition">¶</a></dt>
+<dd><p>Run a full TrustLens analysis on a trained model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>Any</em><em>, </em><em>optional</em>) – Trained machine learning model. Can be None if <code class="docutils literal notranslate"><span class="pre">y_pred</span></code> or <code class="docutils literal notranslate"><span class="pre">y_prob</span></code> are provided manually.</p></li>
+<li><p><strong>X</strong> (<em>np.ndarray</em>) – Validation feature matrix, shape (n_samples, n_features).</p></li>
+<li><p><strong>y_true</strong> (<em>np.ndarray</em>) – Ground-truth labels, shape (n_samples,).</p></li>
+<li><p><strong>y_pred</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Predicted class labels, shape (n_samples,).
+If None, TrustLens will automatically resolve predictions via the backend system.</p></li>
+<li><p><strong>y_prob</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Predicted class probabilities, shape (n_samples, n_classes).
+If None, TrustLens will automatically resolve probabilities via the backend system.</p></li>
+<li><p><strong>framework</strong> (<em>str</em><em>, </em><em>optional</em>) – Explicitly specify the model framework (e.g., ‘sklearn’, ‘xgboost’).
+If None, TrustLens will attempt to auto-detect the framework.</p></li>
+<li><p><strong>embeddings</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Latent representations / embeddings for representation analysis,
+shape (n_samples, embedding_dim).</p></li>
+<li><p><strong>sensitive_features</strong> (<em>dict</em><em>, </em><em>optional</em>) – Mapping of feature name → 1-D array for bias/subgroup analysis.</p></li>
+<li><p><strong>modules</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Subset of analysis modules to run.</p></li>
+<li><p><strong>plugins</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Names of registered plugins to activate.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Print progress updates. Default True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Populated report object with metrics, plots, and narrative summaries.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#trustlens.report.TrustReport" title="trustlens.report.TrustReport">TrustReport</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="trustlens-trustreport">
+<h3><code class="docutils literal notranslate"><span class="pre">trustlens.TrustReport</span></code><a class="headerlink" href="#trustlens-trustreport" title="Link to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="trustlens.report.TrustReport">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trustlens.report.</span></span><span class="sig-name descname"><span class="pre">TrustReport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_prob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embeddings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">framework</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backend_metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trustlens/report.html#TrustReport"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trustlens.report.TrustReport" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Container for all TrustLens analysis results.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trustlens.report.TrustReport.results">
+<span class="sig-name descname"><span class="pre">results</span></span><a class="headerlink" href="#trustlens.report.TrustReport.results" title="Link to this definition">¶</a></dt>
+<dd><p>Nested dictionary keyed by module name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trustlens.report.TrustReport.trust_score">
+<span class="sig-name descname"><span class="pre">trust_score</span></span><a class="headerlink" href="#trustlens.report.TrustReport.trust_score" title="Link to this definition">¶</a></dt>
+<dd><p>Composite 0–100 trust score with sub-scores and grade.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#trustlens.trust_score.TrustScoreResult" title="trustlens.trust_score.TrustScoreResult">TrustScoreResult</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trustlens.report.TrustReport.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><a class="headerlink" href="#trustlens.report.TrustReport.metadata" title="Link to this definition">¶</a></dt>
+<dd><p>Run-level metadata (timestamp, library version, etc.).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trustlens.report.TrustReport.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#trustlens.report.TrustReport.model" title="Link to this definition">¶</a></dt>
+<dd><p>Reference to the analysed model (not serialized to JSON).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="trustlens.report.TrustReport.patterns">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">patterns</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#trustlens.report.TrustReport.patterns" title="Link to this definition">¶</a></dt>
+<dd><p>Detected behavioral patterns (e.g. ‘Confidently Wrong’).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trustlens.report.TrustReport.show">
+<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/trustlens/report.html#TrustReport.show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trustlens.report.TrustReport.show" title="Link to this definition">¶</a></dt>
+<dd><p>Print a rich, structured summary of all analysis results to stdout.</p>
+<p>Displays the Trust Score prominently at the top, followed by
+key insights and then delimited per-module metric summaries.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trustlens.report.TrustReport.summary_plot">
+<span class="sig-name descname"><span class="pre">summary_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trustlens/report.html#TrustReport.summary_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trustlens.report.TrustReport.summary_plot" title="Link to this definition">¶</a></dt>
+<dd><p>Render the TrustLens Summary Dashboard — a single-figure overview
+of the model’s trustworthiness.</p>
+<p>Layout (2×3 grid):</p>
+<blockquote>
+<div><p>Trust Score Gauge Reliability Diag  Confidence Gap</p>
+<p>Error Rate Dist.  Class Dist.    Sub-score Bars</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>save_path</strong> (<em>str</em><em>, </em><em>optional</em>) – If provided, saves the figure to this path (PNG or PDF).</p></li>
+<li><p><strong>show</strong> (<em>bool</em>) – If True, calls <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code> for interactive display.
+Default True. Set to False in non-interactive environments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trustlens.report.TrustReport.show_failures">
+<span class="sig-name descname"><span class="pre">show_failures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">top_k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/trustlens/report.html#TrustReport.show_failures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trustlens.report.TrustReport.show_failures" title="Link to this definition">¶</a></dt>
+<dd><p>Display the most alarming model failures — high-confidence wrong
+predictions that deserve immediate attention.</p>
+<p>For each failure, reports:
+* Predicted class and confidence level
+* True class
+* A “danger rating” based on confidence level
+* Feature values (if <code class="docutils literal notranslate"><span class="pre">feature_names</span></code> provided)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>top_k</strong> (<em>int</em>) – Number of top failures to show. Default 10.</p></li>
+<li><p><strong>images</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Image array shape (n_samples, H, W, C) or (n_samples, H, W).
+If provided, renders a grid of the most-confident wrong predictions.</p></li>
+<li><p><strong>feature_names</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Column names for tabular features in <code class="docutils literal notranslate"><span class="pre">self.X</span></code>.</p></li>
+<li><p><strong>save_path</strong> (<em>str</em><em>, </em><em>optional</em>) – If provided and <code class="docutils literal notranslate"><span class="pre">images</span></code> is given, saves the failure grid as PNG.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">report</span><span class="o">.</span><span class="n">show_failures</span><span class="p">(</span><span class="n">top_k</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span><span class="o">.</span><span class="n">show_failures</span><span class="p">(</span><span class="n">top_k</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">images</span><span class="o">=</span><span class="n">X_images</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trustlens.report.TrustReport.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/trustlens/report.html#TrustReport.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trustlens.report.TrustReport.plot" title="Link to this definition">¶</a></dt>
+<dd><p>Render per-module visualisations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module</strong> (<em>str</em><em>, </em><em>optional</em>) – Which module to plot (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;calibration&quot;</span></code>).
+If None, all available modules are plotted.</p></li>
+<li><p><strong>save_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Directory path where figures are saved as PNG files.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trustlens.report.TrustReport.plot_embedding_2d">
+<span class="sig-name descname"><span class="pre">plot_embedding_2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'umap'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trustlens/report.html#TrustReport.plot_embedding_2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trustlens.report.TrustReport.plot_embedding_2d" title="Link to this definition">¶</a></dt>
+<dd><p>Project stored embeddings to 2D and render a class-colored scatter plot.</p>
+<p>Delegates to the underlying <code class="docutils literal notranslate"><span class="pre">plot_embedding_2d</span></code> in the visualization
+sub-package, forwarding silhouette score (when available) so the plot
+is annotated automatically.</p>
+<p>Guarantees:
+- Returns matplotlib.figure.Figure
+- Raises ValueError when embeddings were not supplied to <code class="docutils literal notranslate"><span class="pre">analyze()</span></code>
+- Projection falls back gracefully (UMAP -&gt; t-SNE -&gt; PCA) when optional libraries are missing</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>method</strong> (<em>str</em>) – Projection algorithm: <code class="docutils literal notranslate"><span class="pre">&quot;umap&quot;</span></code> (default), <code class="docutils literal notranslate"><span class="pre">&quot;tsne&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;pca&quot;</span></code>.</p></li>
+<li><p><strong>n_max</strong> (<em>int</em>) – Max samples plotted.  Subsampled randomly when the embedding matrix
+exceeds this limit.</p></li>
+<li><p><strong>save_path</strong> (<em>str</em><em>, </em><em>optional</em>) – File path to save the figure (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;clusters.png&quot;</span></code>).</p></li>
+<li><p><strong>show</strong> (<em>bool</em>) – Whether to display the figure interactively.  Default True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>matplotlib.figure.Figure</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If embeddings are not available (i.e. not passed to <code class="docutils literal notranslate"><span class="pre">analyze()</span></code>).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trustlens.report.TrustReport.plot_bias">
+<span class="sig-name descname"><span class="pre">plot_bias</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'summary'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_feature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trustlens/report.html#TrustReport.plot_bias"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trustlens.report.TrustReport.plot_bias" title="Link to this definition">¶</a></dt>
+<dd><p>Generate fairness/bias visualizations from report results.</p>
+<p><code class="docutils literal notranslate"><span class="pre">mode</span></code> and <code class="docutils literal notranslate"><span class="pre">multi_feature</span></code> are independent dimensions; the return
+shape is fully determined by their combination, with no flattening.</p>
+<p><strong>Guarantees</strong></p>
+<ul class="simple">
+<li><p>Return shape is fixed by the <code class="docutils literal notranslate"><span class="pre">(mode,</span> <span class="pre">multi_feature)</span></code> combination
+(see the table below). The structure never collapses across calls.</p></li>
+<li><p>Multi-feature outputs never contain <code class="docutils literal notranslate"><span class="pre">None</span></code> values; missing
+components are represented by empty dicts <code class="docutils literal notranslate"><span class="pre">{}</span></code>.</p></li>
+<li><p>Raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> for invalid <code class="docutils literal notranslate"><span class="pre">mode</span></code> or unusable data, regardless
+of <code class="docutils literal notranslate"><span class="pre">multi_feature</span></code>.</p></li>
+</ul>
+<p>Return shape by <code class="docutils literal notranslate"><span class="pre">(mode,</span> <span class="pre">multi_feature)</span></code>:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>mode</p></th>
+<th class="head"><p>multi_feature</p></th>
+<th class="head"><p>Return type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>single mode
+(summary,
+subgroup,
+equalized_odds,
+gap)</p></td>
+<td><p>False</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Figure</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>summary</p></td>
+<td><p>True</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Figure</span></code> (same as <code class="docutils literal notranslate"><span class="pre">False</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p>subgroup,
+equalized_odds,
+gap</p></td>
+<td><p>True</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">Figure]</span></code> keyed by
+feature name (sorted)</p></td>
+</tr>
+<tr class="row-odd"><td><p>all</p></td>
+<td><p>False</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">Figure</span> <span class="pre">|</span> <span class="pre">None]</span></code> keyed
+by mode (existing behavior)</p></td>
+</tr>
+<tr class="row-even"><td><p>all</p></td>
+<td><p>True</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">dict[str,</span> <span class="pre">Figure]]</span></code>
+keyed by mode, then feature.
+Always contains exactly the keys
+‘subgroup’, ‘equalized_odds’,
+‘gap’ (in that order). Components
+with no data return <code class="docutils literal notranslate"><span class="pre">{}</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Returned dict for <code class="docutils literal notranslate"><span class="pre">mode=&quot;all&quot;</span></code> (regardless of <code class="docutils literal notranslate"><span class="pre">multi_feature</span></code>)
+ALWAYS contains exactly three keys in order: <code class="docutils literal notranslate"><span class="pre">'subgroup'</span></code> -&gt;
+<code class="docutils literal notranslate"><span class="pre">'equalized_odds'</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">'gap'</span></code>. Within each multi-feature dict,
+feature order follows <code class="docutils literal notranslate"><span class="pre">sorted(feature_names)</span></code> for determinism.</p>
+<p>Note: <code class="docutils literal notranslate"><span class="pre">mode=&quot;all&quot;</span></code> returns a structured dict and does NOT display
+figures unless <code class="docutils literal notranslate"><span class="pre">show=True</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<em>str</em><em>, </em><em>optional</em>) – Visualization mode. One of {“summary”, “all”, “subgroup”,
+“equalized_odds”, “gap”}. Default “summary”.</p></li>
+<li><p><strong>show</strong> (<em>bool</em>) – Whether to display the figure interactively. Default True.</p></li>
+<li><p><strong>save_path</strong> (<em>str</em><em>, </em><em>optional</em>) – If provided, saves the figure(s) to this path. Only honored when
+<code class="docutils literal notranslate"><span class="pre">multi_feature=False</span></code> (single-feature behavior).
+- Single modes: Treated as full file path. Defaults to <code class="docutils literal notranslate"><span class="pre">.png</span></code> if extension missing.
+- <code class="docutils literal notranslate"><span class="pre">mode=&quot;all&quot;</span></code>: Treated as base name. Appends suffixes and <code class="docutils literal notranslate"><span class="pre">.png</span></code>.
+When <code class="docutils literal notranslate"><span class="pre">multi_feature=True</span></code>, <code class="docutils literal notranslate"><span class="pre">save_path</span></code> is ignored (per-feature
+saving is intentionally not exposed here; use the lower-level
+<code class="docutils literal notranslate"><span class="pre">plot_*_multi</span></code> helpers if you need on-disk output).</p></li>
+<li><p><strong>multi_feature</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, return per-feature figures rather than only the first
+sensitive feature. Default False (backward compatible).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The return type depends on the <code class="docutils literal notranslate"><span class="pre">(mode,</span> <span class="pre">multi_feature)</span></code> combination.
+Possible shapes:
+- <code class="docutils literal notranslate"><span class="pre">Figure</span></code>
+- <code class="docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">Figure</span> <span class="pre">|</span> <span class="pre">None]</span></code>
+- <code class="docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">Figure]</span></code>
+- <code class="docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">dict[str,</span> <span class="pre">Figure]]</span></code>
+See the return-shape table above.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure | dict</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>New modes can be added by extending <code class="docutils literal notranslate"><span class="pre">ALLOWED_MODES</span></code> and dispatch
+logic without breaking existing behavior.
+Function behavior MUST be deterministic given identical inputs (no
+randomness, no state mutation). This includes consistent plot ordering,
+consistent key ordering in dicts, and no randomness in visualization.
+Each returned Figure must be independent (no shared axes, state, or
+references between plots). Each plot must be independently renderable
+and savable.</p>
+<p>Caution: Figures are returned open. If calling this method repeatedly
+in a loop, ensure you call <code class="docutils literal notranslate"><span class="pre">plt.close(fig)</span></code> on the returned figures
+to avoid memory accumulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">mode</span></code> is invalid, <code class="docutils literal notranslate"><span class="pre">&quot;bias&quot;</span></code> is not present in
+    <code class="docutils literal notranslate"><span class="pre">self.results</span></code>, or the data is unusable.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trustlens.report.TrustReport.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'trust_report'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Path</span></span></span><a class="reference internal" href="_modules/trustlens/report.html#TrustReport.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trustlens.report.TrustReport.save" title="Link to this definition">¶</a></dt>
+<dd><p>Save the analysis report.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">path</span></code> ends with ‘.json’ or ‘.txt’, saves a single file.
+Otherwise, treats <code class="docutils literal notranslate"><span class="pre">path</span></code> as a directory and saves a full report
+bundle (JSON, metadata, plots).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – Target file path (e.g., “report.json”) or directory path.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Backward compatibility for <code class="docutils literal notranslate"><span class="pre">directory</span></code> argument.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Resolved path to the saved file or directory.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trustlens.report.TrustReport.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/trustlens/report.html#TrustReport.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trustlens.report.TrustReport.to_dict" title="Link to this definition">¶</a></dt>
+<dd><p>Return all results as a flat, JSON-serializable dictionary.</p>
+<p>Useful for logging to MLflow, W&amp;B, or any experiment tracker.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Flat dict with keys like <code class="docutils literal notranslate"><span class="pre">&quot;calibration.brier_score&quot;</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="trustlens-trustscoreresult">
+<h3><code class="docutils literal notranslate"><span class="pre">trustlens.TrustScoreResult</span></code><a class="headerlink" href="#trustlens-trustscoreresult" title="Link to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="trustlens.trust_score.TrustScoreResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trustlens.trust_score.</span></span><span class="sig-name descname"><span class="pre">TrustScoreResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">score</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grade</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verdict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_scores</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float]</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights_used</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float]</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">breakdown</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float]</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalties_applied</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float]</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_score</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_blocked</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trustlens/trust_score.html#TrustScoreResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trustlens.trust_score.TrustScoreResult" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Structured result from the Trust Score computation.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trustlens.trust_score.TrustScoreResult.score">
+<span class="sig-name descname"><span class="pre">score</span></span><a class="headerlink" href="#trustlens.trust_score.TrustScoreResult.score" title="Link to this definition">¶</a></dt>
+<dd><p>Overall Trust Score in [0, 100].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trustlens.trust_score.TrustScoreResult.grade">
+<span class="sig-name descname"><span class="pre">grade</span></span><a class="headerlink" href="#trustlens.trust_score.TrustScoreResult.grade" title="Link to this definition">¶</a></dt>
+<dd><p>Letter grade: A / B / C / D.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trustlens.trust_score.TrustScoreResult.verdict">
+<span class="sig-name descname"><span class="pre">verdict</span></span><a class="headerlink" href="#trustlens.trust_score.TrustScoreResult.verdict" title="Link to this definition">¶</a></dt>
+<dd><p>Plain-English deployment recommendation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trustlens.trust_score.TrustScoreResult.sub_scores">
+<span class="sig-name descname"><span class="pre">sub_scores</span></span><a class="headerlink" href="#trustlens.trust_score.TrustScoreResult.sub_scores" title="Link to this definition">¶</a></dt>
+<dd><p>Per-dimension scores in [0, 100].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trustlens.trust_score.TrustScoreResult.weights_used">
+<span class="sig-name descname"><span class="pre">weights_used</span></span><a class="headerlink" href="#trustlens.trust_score.TrustScoreResult.weights_used" title="Link to this definition">¶</a></dt>
+<dd><p>Actual weights used (after redistribution for missing dimensions).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trustlens.trust_score.TrustScoreResult.breakdown">
+<span class="sig-name descname"><span class="pre">breakdown</span></span><a class="headerlink" href="#trustlens.trust_score.TrustScoreResult.breakdown" title="Link to this definition">¶</a></dt>
+<dd><p>Weighted contribution of each dimension to the final score.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<hr class="docutils" />
+<section id="visualization">
+<h2>Visualization<a class="headerlink" href="#visualization" title="Link to this heading">¶</a></h2>
+<section id="trustlens-visualization-plot-module">
+<h3><code class="docutils literal notranslate"><span class="pre">trustlens.visualization.plot_module</span></code><a class="headerlink" href="#trustlens-visualization-plot-module" title="Link to this heading">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="trustlens.visualization.plot_module">
+<span class="sig-prename descclassname"><span class="pre">trustlens.visualization.</span></span><span class="sig-name descname"><span class="pre">plot_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">embeddings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/trustlens/visualization.html#plot_module"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trustlens.visualization.plot_module" title="Link to this definition">¶</a></dt>
+<dd><p>Dispatch a module’s result data to the appropriate visualization function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module_name</strong> (<em>str</em>) – Name of the analysis module (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;calibration&quot;</span></code>).</p></li>
+<li><p><strong>data</strong> (<em>dict</em>) – Module result data from TrustReport.results[module_name].</p></li>
+<li><p><strong>save_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Directory to save the resulting PNG file(s).</p></li>
+<li><p><strong>embeddings</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Embedding matrix (only used by <code class="docutils literal notranslate"><span class="pre">&quot;representation&quot;</span></code> module).</p></li>
+<li><p><strong>labels</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Ground-truth labels (only used by <code class="docutils literal notranslate"><span class="pre">&quot;representation&quot;</span></code> module).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-trustlens.visualization.fairness">
+<span id="trustlens-visualization-fairness"></span><h3><code class="docutils literal notranslate"><span class="pre">trustlens.visualization.fairness</span></code><a class="headerlink" href="#module-trustlens.visualization.fairness" title="Link to this heading">¶</a></h3>
+<section id="fairness-visualizations">
+<h4>Fairness Visualizations<a class="headerlink" href="#fairness-visualizations" title="Link to this heading">¶</a></h4>
+<p>Visualizations for fairness diagnostics across subgroups.</p>
+<p>Built on top of <code class="docutils literal notranslate"><span class="pre">equalized_odds()</span></code> and <code class="docutils literal notranslate"><span class="pre">subgroup_performance()</span></code> outputs.
+Inputs are expected to come from <code class="docutils literal notranslate"><span class="pre">report.results[&quot;bias&quot;]</span></code>.</p>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="trustlens.visualization.fairness.plot_subgroup_performance">
+<span class="sig-prename descclassname"><span class="pre">trustlens.visualization.fairness.</span></span><span class="sig-name descname"><span class="pre">plot_subgroup_performance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subgroup_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'accuracy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="_modules/trustlens/visualization/fairness.html#plot_subgroup_performance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trustlens.visualization.fairness.plot_subgroup_performance" title="Link to this definition">¶</a></dt>
+<dd><p>Bar chart of model performance broken down by subgroup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subgroup_data</strong> (<em>dict</em>) – Output from <code class="docutils literal notranslate"><span class="pre">subgroup_performance()</span></code> for a single feature.
+Example: <code class="docutils literal notranslate"><span class="pre">results[&quot;gender&quot;]</span></code>.</p></li>
+<li><p><strong>feature_name</strong> (<em>str</em>) – Name of the sensitive feature (used as axis label and title).</p></li>
+<li><p><strong>metric</strong> (<em>str</em><em>, </em><em>optional</em>) – Which metric to plot. Supports <code class="docutils literal notranslate"><span class="pre">&quot;accuracy&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;f1&quot;</span></code>.
+Default: <code class="docutils literal notranslate"><span class="pre">&quot;accuracy&quot;</span></code>.</p></li>
+<li><p><strong>save_path</strong> (<em>str</em><em>, </em><em>optional</em>) – If provided, saves figure to this path.</p></li>
+<li><p><strong>show</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to display the figure interactively. Default: <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><code class="docutils literal notranslate"><span class="pre">subgroup_data</span></code> may optionally contain a <code class="docutils literal notranslate"><span class="pre">&quot;__summary__&quot;</span></code> key
+(as returned by <code class="docutils literal notranslate"><span class="pre">subgroup_performance()</span></code>) for gap annotation.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">subgroup_performance</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;gender&quot;</span><span class="p">:</span> <span class="n">gender</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plot_subgroup_performance</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;gender&quot;</span><span class="p">],</span> <span class="s2">&quot;gender&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trustlens.visualization.fairness.plot_equalized_odds">
+<span class="sig-prename descclassname"><span class="pre">trustlens.visualization.fairness.</span></span><span class="sig-name descname"><span class="pre">plot_equalized_odds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">equalized_odds_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="_modules/trustlens/visualization/fairness.html#plot_equalized_odds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trustlens.visualization.fairness.plot_equalized_odds" title="Link to this definition">¶</a></dt>
+<dd><p>Grouped bar chart of TPR and FPR per subgroup.</p>
+<p>Displays TPR and FPR side by side for each group, making disparities
+between subgroups immediately visible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>equalized_odds_data</strong> (<em>dict</em>) – Output from <code class="docutils literal notranslate"><span class="pre">equalized_odds()</span></code> for a single feature.
+Example: <code class="docutils literal notranslate"><span class="pre">results[&quot;gender&quot;]</span></code>.</p></li>
+<li><p><strong>feature_name</strong> (<em>str</em>) – Name of the sensitive feature (used as axis label and title).</p></li>
+<li><p><strong>save_path</strong> (<em>str</em><em>, </em><em>optional</em>) – If provided, saves figure to this path.</p></li>
+<li><p><strong>show</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to display the figure interactively. Default: <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><code class="docutils literal notranslate"><span class="pre">equalized_odds_data</span></code> must contain a <code class="docutils literal notranslate"><span class="pre">&quot;__summary__&quot;</span></code> key
+(as returned by <code class="docutils literal notranslate"><span class="pre">equalized_odds()</span></code>). Missing summary data
+will result in annotations being silently skipped.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">equalized_odds</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;gender&quot;</span><span class="p">:</span> <span class="n">gender</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plot_equalized_odds</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;gender&quot;</span><span class="p">],</span> <span class="s2">&quot;gender&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trustlens.visualization.fairness.plot_fairness_gap">
+<span class="sig-prename descclassname"><span class="pre">trustlens.visualization.fairness.</span></span><span class="sig-name descname"><span class="pre">plot_fairness_gap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">equalized_odds_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="_modules/trustlens/visualization/fairness.html#plot_fairness_gap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trustlens.visualization.fairness.plot_fairness_gap" title="Link to this definition">¶</a></dt>
+<dd><p>Bar chart showing TPR gap and FPR gap between best and worst subgroups.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>equalized_odds_data</strong> (<em>dict</em>) – Output from <code class="docutils literal notranslate"><span class="pre">equalized_odds()</span></code> for a single feature.
+Example: <code class="docutils literal notranslate"><span class="pre">results[&quot;gender&quot;]</span></code>.</p></li>
+<li><p><strong>feature_name</strong> (<em>str</em>) – Name of the sensitive feature (used as axis label and title).</p></li>
+<li><p><strong>save_path</strong> (<em>str</em><em>, </em><em>optional</em>) – If provided, saves figure to this path.</p></li>
+<li><p><strong>show</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to display the figure interactively. Default: <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><code class="docutils literal notranslate"><span class="pre">equalized_odds_data</span></code> must contain a <code class="docutils literal notranslate"><span class="pre">&quot;__summary__&quot;</span></code> key
+(as returned by <code class="docutils literal notranslate"><span class="pre">equalized_odds()</span></code>). Missing summary data
+will result in annotations being silently skipped.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">equalized_odds</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;gender&quot;</span><span class="p">:</span> <span class="n">gender</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plot_fairness_gap</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;gender&quot;</span><span class="p">],</span> <span class="s2">&quot;gender&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trustlens.visualization.fairness.plot_subgroup_performance_multi">
+<span class="sig-prename descclassname"><span class="pre">trustlens.visualization.fairness.</span></span><span class="sig-name descname"><span class="pre">plot_subgroup_performance_multi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subgroup_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'accuracy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Figure</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/trustlens/visualization/fairness.html#plot_subgroup_performance_multi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trustlens.visualization.fairness.plot_subgroup_performance_multi" title="Link to this definition">¶</a></dt>
+<dd><p>Plot subgroup performance for <strong>each</strong> sensitive feature.</p>
+<p>Iterates over all features in <code class="docutils literal notranslate"><span class="pre">subgroup_data</span></code> and delegates to
+<a class="reference internal" href="#trustlens.visualization.fairness.plot_subgroup_performance" title="trustlens.visualization.fairness.plot_subgroup_performance"><code class="xref py py-func docutils literal notranslate"><span class="pre">plot_subgroup_performance()</span></code></a> for each one.  No feature is silently
+dropped.  Features are processed in sorted order for deterministic output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subgroup_data</strong> (<em>dict</em>) – Mapping of <code class="docutils literal notranslate"><span class="pre">{feature_name:</span> <span class="pre">feature_data}</span></code> as returned by
+<code class="docutils literal notranslate"><span class="pre">subgroup_performance()</span></code> when multiple sensitive features are passed.
+Example: <code class="docutils literal notranslate"><span class="pre">results[&quot;bias&quot;][&quot;subgroup_performance&quot;]</span></code>.</p></li>
+<li><p><strong>metric</strong> (<em>str</em><em>, </em><em>optional</em>) – Which metric to plot. Supports <code class="docutils literal notranslate"><span class="pre">&quot;accuracy&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;f1&quot;</span></code>.
+Default: <code class="docutils literal notranslate"><span class="pre">&quot;accuracy&quot;</span></code>.</p></li>
+<li><p><strong>save_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Directory in which per-feature PNG files are saved.
+Files are named <code class="docutils literal notranslate"><span class="pre">subgroup_performance_&lt;feature_name&gt;.png</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">None</span></code>, no files are written.</p></li>
+<li><p><strong>show</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to display each figure interactively. Default: <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Mapping of <code class="docutils literal notranslate"><span class="pre">{feature_name:</span> <span class="pre">Figure}</span></code> for every feature processed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, matplotlib.figure.Figure]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">subgroup_performance</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">sensitive_features</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">figs</span> <span class="o">=</span> <span class="n">plot_subgroup_performance_multi</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig_gender</span> <span class="o">=</span> <span class="n">figs</span><span class="p">[</span><span class="s2">&quot;gender&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trustlens.visualization.fairness.plot_equalized_odds_multi">
+<span class="sig-prename descclassname"><span class="pre">trustlens.visualization.fairness.</span></span><span class="sig-name descname"><span class="pre">plot_equalized_odds_multi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">equalized_odds_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Figure</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/trustlens/visualization/fairness.html#plot_equalized_odds_multi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trustlens.visualization.fairness.plot_equalized_odds_multi" title="Link to this definition">¶</a></dt>
+<dd><p>Plot equalized odds for <strong>each</strong> sensitive feature.</p>
+<p>Iterates over all features in <code class="docutils literal notranslate"><span class="pre">equalized_odds_data</span></code> and delegates to
+<a class="reference internal" href="#trustlens.visualization.fairness.plot_equalized_odds" title="trustlens.visualization.fairness.plot_equalized_odds"><code class="xref py py-func docutils literal notranslate"><span class="pre">plot_equalized_odds()</span></code></a> for each one.  No feature is silently dropped.
+Features are processed in sorted order for deterministic output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>equalized_odds_data</strong> (<em>dict</em>) – Mapping of <code class="docutils literal notranslate"><span class="pre">{feature_name:</span> <span class="pre">feature_data}</span></code> as returned by
+<code class="docutils literal notranslate"><span class="pre">equalized_odds()</span></code> when multiple sensitive features are passed.
+Example: <code class="docutils literal notranslate"><span class="pre">results[&quot;bias&quot;][&quot;equalized_odds&quot;]</span></code>.</p></li>
+<li><p><strong>save_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Directory in which per-feature PNG files are saved.
+Files are named <code class="docutils literal notranslate"><span class="pre">equalized_odds_&lt;feature_name&gt;.png</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">None</span></code>, no files are written.</p></li>
+<li><p><strong>show</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to display each figure interactively. Default: <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Mapping of <code class="docutils literal notranslate"><span class="pre">{feature_name:</span> <span class="pre">Figure}</span></code> for every feature processed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, matplotlib.figure.Figure]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">equalized_odds</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">sensitive_features</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">figs</span> <span class="o">=</span> <span class="n">plot_equalized_odds_multi</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig_age</span> <span class="o">=</span> <span class="n">figs</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trustlens.visualization.fairness.plot_fairness_gap_multi">
+<span class="sig-prename descclassname"><span class="pre">trustlens.visualization.fairness.</span></span><span class="sig-name descname"><span class="pre">plot_fairness_gap_multi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">equalized_odds_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Figure</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/trustlens/visualization/fairness.html#plot_fairness_gap_multi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trustlens.visualization.fairness.plot_fairness_gap_multi" title="Link to this definition">¶</a></dt>
+<dd><p>Plot fairness gap for <strong>each</strong> sensitive feature.</p>
+<p>Iterates over all features in <code class="docutils literal notranslate"><span class="pre">equalized_odds_data</span></code> and delegates to
+<a class="reference internal" href="#trustlens.visualization.fairness.plot_fairness_gap" title="trustlens.visualization.fairness.plot_fairness_gap"><code class="xref py py-func docutils literal notranslate"><span class="pre">plot_fairness_gap()</span></code></a> for each one.  No feature is silently dropped.
+Features are processed in sorted order for deterministic output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>equalized_odds_data</strong> (<em>dict</em>) – Mapping of <code class="docutils literal notranslate"><span class="pre">{feature_name:</span> <span class="pre">feature_data}</span></code> as returned by
+<code class="docutils literal notranslate"><span class="pre">equalized_odds()</span></code> when multiple sensitive features are passed.
+Example: <code class="docutils literal notranslate"><span class="pre">results[&quot;bias&quot;][&quot;equalized_odds&quot;]</span></code>.</p></li>
+<li><p><strong>save_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Directory in which per-feature PNG files are saved.
+Files are named <code class="docutils literal notranslate"><span class="pre">fairness_gap_&lt;feature_name&gt;.png</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">None</span></code>, no files are written.</p></li>
+<li><p><strong>show</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to display each figure interactively. Default: <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Mapping of <code class="docutils literal notranslate"><span class="pre">{feature_name:</span> <span class="pre">Figure}</span></code> for every feature processed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, matplotlib.figure.Figure]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">equalized_odds</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">sensitive_features</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">figs</span> <span class="o">=</span> <span class="n">plot_fairness_gap_multi</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig_gender</span> <span class="o">=</span> <span class="n">figs</span><span class="p">[</span><span class="s2">&quot;gender&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="metrics/bias.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Bias and Fairness Metrics</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="guides/fairness_audit_workflow.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Fairness Audit Workflow</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Shahid Ul Islam
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">API Reference</a><ul>
+<li><a class="reference internal" href="#core-api">Core API</a><ul>
+<li><a class="reference internal" href="#trustlens-analyze"><code class="docutils literal notranslate"><span class="pre">trustlens.analyze</span></code></a><ul>
+<li><a class="reference internal" href="#trustlens.api.analyze"><code class="docutils literal notranslate"><span class="pre">analyze()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#trustlens-trustreport"><code class="docutils literal notranslate"><span class="pre">trustlens.TrustReport</span></code></a><ul>
+<li><a class="reference internal" href="#trustlens.report.TrustReport"><code class="docutils literal notranslate"><span class="pre">TrustReport</span></code></a><ul>
+<li><a class="reference internal" href="#trustlens.report.TrustReport.results"><code class="docutils literal notranslate"><span class="pre">TrustReport.results</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.report.TrustReport.trust_score"><code class="docutils literal notranslate"><span class="pre">TrustReport.trust_score</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.report.TrustReport.metadata"><code class="docutils literal notranslate"><span class="pre">TrustReport.metadata</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.report.TrustReport.model"><code class="docutils literal notranslate"><span class="pre">TrustReport.model</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.report.TrustReport.patterns"><code class="docutils literal notranslate"><span class="pre">TrustReport.patterns</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.report.TrustReport.show"><code class="docutils literal notranslate"><span class="pre">TrustReport.show()</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.report.TrustReport.summary_plot"><code class="docutils literal notranslate"><span class="pre">TrustReport.summary_plot()</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.report.TrustReport.show_failures"><code class="docutils literal notranslate"><span class="pre">TrustReport.show_failures()</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.report.TrustReport.plot"><code class="docutils literal notranslate"><span class="pre">TrustReport.plot()</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.report.TrustReport.plot_embedding_2d"><code class="docutils literal notranslate"><span class="pre">TrustReport.plot_embedding_2d()</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.report.TrustReport.plot_bias"><code class="docutils literal notranslate"><span class="pre">TrustReport.plot_bias()</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.report.TrustReport.save"><code class="docutils literal notranslate"><span class="pre">TrustReport.save()</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.report.TrustReport.to_dict"><code class="docutils literal notranslate"><span class="pre">TrustReport.to_dict()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#trustlens-trustscoreresult"><code class="docutils literal notranslate"><span class="pre">trustlens.TrustScoreResult</span></code></a><ul>
+<li><a class="reference internal" href="#trustlens.trust_score.TrustScoreResult"><code class="docutils literal notranslate"><span class="pre">TrustScoreResult</span></code></a><ul>
+<li><a class="reference internal" href="#trustlens.trust_score.TrustScoreResult.score"><code class="docutils literal notranslate"><span class="pre">TrustScoreResult.score</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.trust_score.TrustScoreResult.grade"><code class="docutils literal notranslate"><span class="pre">TrustScoreResult.grade</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.trust_score.TrustScoreResult.verdict"><code class="docutils literal notranslate"><span class="pre">TrustScoreResult.verdict</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.trust_score.TrustScoreResult.sub_scores"><code class="docutils literal notranslate"><span class="pre">TrustScoreResult.sub_scores</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.trust_score.TrustScoreResult.weights_used"><code class="docutils literal notranslate"><span class="pre">TrustScoreResult.weights_used</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.trust_score.TrustScoreResult.breakdown"><code class="docutils literal notranslate"><span class="pre">TrustScoreResult.breakdown</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#visualization">Visualization</a><ul>
+<li><a class="reference internal" href="#trustlens-visualization-plot-module"><code class="docutils literal notranslate"><span class="pre">trustlens.visualization.plot_module</span></code></a><ul>
+<li><a class="reference internal" href="#trustlens.visualization.plot_module"><code class="docutils literal notranslate"><span class="pre">plot_module()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-trustlens.visualization.fairness"><code class="docutils literal notranslate"><span class="pre">trustlens.visualization.fairness</span></code></a><ul>
+<li><a class="reference internal" href="#fairness-visualizations">Fairness Visualizations</a></li>
+<li><a class="reference internal" href="#trustlens.visualization.fairness.plot_subgroup_performance"><code class="docutils literal notranslate"><span class="pre">plot_subgroup_performance()</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.visualization.fairness.plot_equalized_odds"><code class="docutils literal notranslate"><span class="pre">plot_equalized_odds()</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.visualization.fairness.plot_fairness_gap"><code class="docutils literal notranslate"><span class="pre">plot_fairness_gap()</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.visualization.fairness.plot_subgroup_performance_multi"><code class="docutils literal notranslate"><span class="pre">plot_subgroup_performance_multi()</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.visualization.fairness.plot_equalized_odds_multi"><code class="docutils literal notranslate"><span class="pre">plot_equalized_odds_multi()</span></code></a></li>
+<li><a class="reference internal" href="#trustlens.visualization.fairness.plot_fairness_gap_multi"><code class="docutils literal notranslate"><span class="pre">plot_fairness_gap_multi()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=6c02275b"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    </body>
+</html>
