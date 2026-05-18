@@ -18,7 +18,7 @@ This repository hosts the **generated static documentation site** for TrustLens 
 
 Documentation is available here:
 
-**🔗 https://trustlens.github.io/**
+**🔗 https://khanz9664.github.io/trustlensdocs/**
 
 *(URL will become active after GitHub Pages deployment.)*
 
