@@ -20,8 +20,6 @@ Documentation is available here:
 
 **🔗 https://khanz9664.github.io/trustlensdocs/**
 
-*(URL will become active after GitHub Pages deployment.)*
-
 ---
 
 ## 🚀 Main TrustLens Repository
